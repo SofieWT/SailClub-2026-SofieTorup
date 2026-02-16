@@ -122,6 +122,18 @@ namespace TestService
             Assert.IsNull(foundBoat);
         }
 
+        [TestMethod]
+        public void FilterBoats_BoatsHasFilterCondition()
+        {
+            //Arrange
+            BoatRepository bRepo = new BoatRepository();
+            Boat b1 = new Boat(99, BoatType.LASERJOLLE, "model", "19-1919", "Ingen Info", 8, 8, 8, "2000");
+            //act
+            List<Boat> returnedBoats = bRepo.FilterBoats("model");
+
+            //assert
+            //Assert.
+        }
 
     }
 }

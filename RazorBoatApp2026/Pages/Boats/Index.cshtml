@@ -36,6 +36,7 @@
                 <th>
                     <button type="submit" class="btn btn-link" name="SortBy" value="YearOfConstruction">Year Of Construction</button>
                 </th>
+                <th>Engine Information</th>
             </tr>
         </thead>
         <tbody>
@@ -47,6 +48,7 @@
                     <td>@item.Model</td>
                     <td>@item.SailNumber</td>
                     <td>@item.YearOfConstruction</td>
+                    <td>@item.EngineInfo</td>
                     <td>
                         <a asp-page="EditBoat" asp-route-sailNumber="@item.SailNumber">Edit</a> |
                         <a asp-page="DeleteBoat" asp-route-sailNumber="@item.SailNumber">Delete</a>
