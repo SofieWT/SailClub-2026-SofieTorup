@@ -1,0 +1,18 @@
+﻿@page
+@model RazorBoatApp2026.Pages.Boats.DeleteEventModel
+@{
+    ViewData["Title"] = "Delete boat";
+}
+
+<h1>Delete boat</h1>
+<form method="post">
+    <div class=" form-group">
+        <label>Boat Id</label> : @Model.BoatToBeDeleted.Id<br>
+        <label>Boat SailNumber</label> : @Model.BoatToBeDeleted.SailNumber<br>
+        <label>Boat Model</label> : @Model.BoatToBeDeleted.Model<br>
+        <label>Boat YearOfConstruction</label> : @Model.BoatToBeDeleted.YearOfConstruction<br>
+        <input type="submit" value="Delete Boat" asp-page-handler="Delete" asp-route-sailNumber="@Model.BoatToBeDeleted.SailNumber" class="btn-danger" />
+        <input type="submit" value="Cancel" asp-page-handler="Cancel" class="btn-warning" />
+    </div>
+</form>
+

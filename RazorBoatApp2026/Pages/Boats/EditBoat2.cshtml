@@ -1,0 +1,59 @@
+﻿@page
+@using SailClubLibrary.Models
+@model RazorBoatApp2026.Pages.Boats.EditBoat2Model
+@{
+    ViewData["Title"] = "Edit boat 2";
+}
+<h1>Edit boat 2</h1>
+
+<form method="post">
+
+    <div class="form-group">
+        <label asp-for="@Model.BoatToUpdate2.Id" class="control-label"></label>
+        <input asp-for="@Model.BoatToUpdate2.Id" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.BoatToUpdate2.Model" class="control-label"></label>
+        <input asp-for="@Model.BoatToUpdate2.Model" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.BoatToUpdate2.SailNumber" class="control-label"></label>
+        <input asp-for="@Model.BoatToUpdate2.SailNumber" readonly class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.BoatToUpdate2.TheBoatType" class="control-label"></label>
+        <select asp-for="@Model.BoatToUpdate2.TheBoatType" asp-items="Html.GetEnumSelectList<BoatType>()" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.BoatToUpdate2.Draft" class="control-label"></label>
+        <input asp-for="@Model.BoatToUpdate2.Draft" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.BoatToUpdate2.Width" class="control-label"></label>
+        <input asp-for="@Model.BoatToUpdate2.Width" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.BoatToUpdate2.Length" class="control-label"></label>
+        <input asp-for="@Model.BoatToUpdate2.Length" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.BoatToUpdate2.YearOfConstruction" class="control-label"></label>
+        <input asp-for="@Model.BoatToUpdate2.YearOfConstruction" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Update boat" class="btn-primary" />
+        <input type="submit" value="Delete boat" asp-page-handler="Delete" class="btn-danger" />
+    </div>
+    <div>
+        <a asp-page="Index"> Return to boats </a>
+    </div>
+
+</form>

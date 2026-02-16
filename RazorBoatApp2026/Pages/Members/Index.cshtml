@@ -1,0 +1,63 @@
+﻿@page
+@using SailClubLibrary.Models
+@model RazorBoatApp2026.Pages.Members.IndexModel
+@{
+    ViewData["Title"] = "List of members";
+}
+<h1>List of members</h1>
+
+<h2>Number of members: @Model.Members.Count</h2>
+<p>
+    <a asp-page="CreateMember">Create a new member</a>
+</p>
+
+<form method="get">
+    search: <input type="text" asp-for="@Model.FilterCriteria" />
+    <input type="submit" value="Filter" />
+</form>
+
+<form method="get">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <button type="submit" class="btn btn-link" name="SortBy" value="Id">Id</button>
+                </th>
+                <th>
+                    <button type="submit" class="btn btn-link" name="SortBy" value="FirstName">FirstName</button>
+                </th>
+                <th>
+                    <button type="submit" class="btn btn-link" name="SortBy" value="SurName">SurName</button>
+                </th>
+                <th>PhoneNumber</th>
+                <th>Mail</th>
+                <th>Address</th>
+                <th>
+                    <button type="submit" class="btn btn-link" name="SortBy" value="City">City</button>
+                </th>
+                <th>Member Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Member item in Model.Members)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.FirstName</td>
+                    <td>@item.SurName</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.Mail</td>
+                    <td>@item.Address</td>
+                    <td>@item.City</td>
+                    <td>@item.TheMemberRole</td>
+                    <td>
+                        <a asp-page="EditMember" asp-route-phoneNumber="@item.PhoneNumber">Edit</a> |
+                        <a asp-page="DeleteMember" asp-route-phoneNumber="@item.PhoneNumber">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</form>
+
