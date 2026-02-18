@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<IBoatRepository, BoatRepository>();//1. interfacetype 2. repository type - nu er boatrepo stillet til rådighed.
 builder.Services.AddSingleton<IMemberRepository, MemberRepository>();
+builder.Services.AddSingleton<IBookingRepository, BookingRepository>();
 
 var app = builder.Build();
 
