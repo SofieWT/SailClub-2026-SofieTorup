@@ -29,21 +29,22 @@ namespace RazorBoatApp2026.Pages.Bookings
             _mRepo = memberRepository;
             _boRepo = bookingRepository;
         }
+
         public IActionResult OnGet(string sailNumber)
         {
             BookedBoat = _bRepo.SearchBoat(sailNumber);
             return Page();
         }
-        public IActionResult OnPostBook(string phoneNumber)
+
+        public IActionResult OnPostBook()
         {
             List<Booking> activeBooking = new List<Booking>();
 
-            Member member = _mRepo.SearchMember(phoneNumber);
+            Member member = _mRepo.SearchMember(PhoneNumber);
             Booking newBooking = new Booking(Id, StartDate, EndDate, Destination, member, BookedBoat);
             _boRepo.AddBooking(newBooking);
 
             activeBooking.Add(newBooking);
-
             return RedirectToPage("Index");
         }
         public IActionResult OnPostCancel()

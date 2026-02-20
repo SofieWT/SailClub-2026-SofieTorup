@@ -30,11 +30,6 @@ namespace RazorBoatApp2026.Pages.Boats
 
             switch (SortBy)
             {
-                case "Id":
-                    {
-                        Boats.Sort();
-                        break;
-                    }
                 case "SailNumber":
                     {
                         IComparer<Boat> boatComparer = new BoatCompareBySailNumber();
@@ -47,7 +42,11 @@ namespace RazorBoatApp2026.Pages.Boats
                         Boats.Sort(boatComparer);
                         break;
                     }
-                //default
+                default:
+                    {
+                        Boats.Sort();
+                        break;
+                    }
             }
         }
     }

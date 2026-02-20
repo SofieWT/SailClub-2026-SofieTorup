@@ -14,12 +14,22 @@ namespace RazorBoatApp2026.Pages.Members
         public string FilterCriteria { get; set; }
         [BindProperty(SupportsGet = true)]
         public string SortBy { get; set; }
+        [BindProperty]
+        public string FilterBy { get; set; } = "All";
+        [BindProperty]
+        public MemberType? SelectedMemberType { get; set; }
+
         public IndexModel(IMemberRepository memberRepository)
         {
             mRepo = memberRepository;
         }
         public void OnGet()
         {
+            if(!string.IsNullOrEmpty(FilterBy))
+            {
+
+            }
+
             if(!string.IsNullOrEmpty(FilterCriteria))
             {
                 Members = mRepo.FilterNameMembers(FilterCriteria);
@@ -30,11 +40,6 @@ namespace RazorBoatApp2026.Pages.Members
 
             switch (SortBy)
             {
-                case "Id":
-                    {
-                        Members.Sort();
-                        break;
-                    }
                 case "FirstName":
                     {
                         IComparer<Member> memberComparer = new MemberCompareByFirstName();
@@ -54,10 +59,11 @@ namespace RazorBoatApp2026.Pages.Members
                         Members.Sort(memberCityComparer);
                         break;
                     }
-                //default " " :
-                //    {
-                //        break;
-                //    }
+                default :
+                    {
+                        Members.Sort();
+                        break;
+                    }
             }
         }
 

@@ -4,20 +4,17 @@
 @{
     ViewData["Title"] = "List of bookings";
 }
-
+<h1>List of bookings</h1>
+<p>There are @Model.Bookings.Count bookings</p>
 <table class="table">
     <thead>
         <tr>
-            <th>Id
-            </th>
+            <th>Id</th>
             <th>Start date</th>
             <th>End date</th>
-            <th>
-                Destination
-            </th>
-            <th>
-                Name Of Member
-            </th>
+            <th>Destination</th>
+            <th>Name Of Member</th>
+            <th>Member's Phonenumber </th>
             <th>Booked boat Sailnumber</th>
         </tr>
     </thead>
@@ -30,6 +27,7 @@
                 <td>@item.EndDate</td>
                 <td>@item.Destination</td>
                 <td>@item.TheMember.FirstName</td>
+                <td>@item.TheMember.PhoneNumber</td>
                 <td>@item.TheBoat.SailNumber</td>
             </tr>
         }
