@@ -1,3 +1,4 @@
+using SailClubLibrary.Helpers.Filter;
 using SailClubLibrary.Interfaces;
 using SailClubLibrary.Services;
 
@@ -8,6 +9,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddSingleton<IBoatRepository, BoatRepository>();//1. interfacetype 2. repository type - nu er boatrepo stillet til rådighed.
 builder.Services.AddSingleton<IMemberRepository, MemberRepository>();
 builder.Services.AddSingleton<IBookingRepository, BookingRepository>();
+builder.Services.AddSingleton<IFilterFuncs,FilterFuncs>();
 
 var app = builder.Build();
 

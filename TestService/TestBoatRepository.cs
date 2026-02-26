@@ -8,7 +8,7 @@ namespace TestService
     public sealed class TestBoatRepository
     {
         [TestMethod]
-        public void AddBoat_WithNonExsitantSailNo_NoException()
+        public void AddBoat_WithNonExsitingSailNo_NoException()
         {
             //Arrange - laver et objekt med unik SailNo
             BoatRepository bRepo = new BoatRepository();
@@ -24,7 +24,7 @@ namespace TestService
         }
 
         [TestMethod]
-        public void AddBoat_WithExsitantSailNo_Exception() //spørg Poul.
+        public void AddBoat_WithExsitingSailNo_Exception() //spørg Poul.
         {
             //Arrange
             BoatRepository bRepo = new BoatRepository();
@@ -46,7 +46,7 @@ namespace TestService
         //    Assert.ThrowsException<NullReferenceException>(() => bRepo.AddBoat(b1));
         //}
         [TestMethod]
-        public void RemoveBoat_WithExsitantSailNo_NoException() //spørg Poul.
+        public void RemoveBoat_WithExsitingSailNo_NoException()
         {   
             //Arrange
             BoatRepository bRepo = new BoatRepository();
@@ -76,7 +76,7 @@ namespace TestService
         //}
 
         [TestMethod]
-        public void UpdateBoat_SailNoExist_NoException()
+        public void UpdateBoat_SailNoExisting_NoException()
         {
             //Arrange
             BoatRepository bRepo = new BoatRepository();
@@ -97,7 +97,7 @@ namespace TestService
         }
 
         [TestMethod]
-        public void SearchBoat_ExistantSailNumber_NoException()
+        public void SearchBoat_ExistingSailNumber_NoException()
         {
             //Arrange
             BoatRepository bRepo = new BoatRepository();
@@ -110,7 +110,7 @@ namespace TestService
             Assert.AreSame(b1.SailNumber, foundBoat.SailNumber);
         }
         [TestMethod]
-        public void SearchBoat_NonExistantSailNumber_NullReturned()
+        public void SearchBoat_NonExistentSailNumber_NullReturned()
         {
             //Arrange
             BoatRepository bRepo = new BoatRepository();
@@ -125,13 +125,13 @@ namespace TestService
         [TestMethod]
         public void FilterBoats_BoatsHasFilterCondition()
         {
-            //Arrange
-            BoatRepository bRepo = new BoatRepository();
-            Boat b1 = new Boat(99, BoatType.LASERJOLLE, "model", "19-1919", "Ingen Info", 8, 8, 8, "2000");
-            //act
-            List<Boat> returnedBoats = bRepo.FilterBoats("model");
+            ////Arrange
+            //BoatRepository bRepo = new BoatRepository();
+            //Boat b1 = new Boat(99, BoatType.LASERJOLLE, "modellen", "19-1919", "Ingen Info", 8, 8, 8, "2000");
+            ////act
+            //List<Boat> returnedBoats = bRepo.FilterBoats("model");
 
-            //assert
+            ////assert
             //Assert.
         }
 

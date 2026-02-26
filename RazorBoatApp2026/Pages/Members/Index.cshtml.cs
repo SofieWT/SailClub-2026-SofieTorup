@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SailClubLibrary.Helpers.Filter;
 using SailClubLibrary.Helpers.Sorting;
 using SailClubLibrary.Interfaces;
 using SailClubLibrary.Models;
@@ -9,34 +10,34 @@ namespace RazorBoatApp2026.Pages.Members
     public class IndexModel : PageModel
     {
         private IMemberRepository mRepo;
+        private IFilterFuncs _filterFunc;
         public List<Member> Members { get; set; }
         [BindProperty(SupportsGet = true)]
         public string FilterCriteria { get; set; }
         [BindProperty(SupportsGet = true)]
         public string SortBy { get; set; }
-        [BindProperty]
-        public string FilterBy { get; set; } = "All";
+        [BindProperty(SupportsGet = true)]
+        public string FilterBy { get; set; }
         [BindProperty]
         public MemberType? SelectedMemberType { get; set; }
 
-        public IndexModel(IMemberRepository memberRepository)
+        public IndexModel(IMemberRepository memberRepository, IFilterFuncs filterFunc)
         {
             mRepo = memberRepository;
+            _filterFunc = filterFunc;
         }
         public void OnGet()
         {
-            if(!string.IsNullOrEmpty(FilterBy))
+            //VI skal bruge GetAll til medlemmer, som listen, som sendes videre til filter-funktion
+            if (!string.IsNullOrEmpty(FilterCriteria))
             {
-
-            }
-
-            if(!string.IsNullOrEmpty(FilterCriteria))
-            {
-                Members = mRepo.FilterNameMembers(FilterCriteria);
+                var predicates = FilterByPredicate();
+                Members = _filterFunc.FilterFunction(mRepo.GetAllMembers(), predicates.ToArray());
             }
             else
+            {
                 Members = mRepo.GetAllMembers();
-
+            }
 
             switch (SortBy)
             {
@@ -59,7 +60,7 @@ namespace RazorBoatApp2026.Pages.Members
                         Members.Sort(memberCityComparer);
                         break;
                     }
-                default :
+                default:
                     {
                         Members.Sort();
                         break;
@@ -67,5 +68,54 @@ namespace RazorBoatApp2026.Pages.Members
             }
         }
 
+        public List<Predicate<Member>> FilterByPredicate()
+        {
+
+            List<Predicate<Member>> predicatesList = new List<Predicate<Member>>();
+            Predicate<Member> firstNames = m => m.FirstName.ToLower().Contains(FilterCriteria.ToLower());
+            Predicate<Member> surNames = m => m.SurName.ToLower().Contains(FilterCriteria.ToLower());
+            Predicate<Member> phoneNumbers = m => m.PhoneNumber.Contains(FilterCriteria);
+            Predicate<Member> mails = m => m.Mail.ToLower().Contains(FilterCriteria.ToLower());
+            Predicate<Member> cities = m => m.City.ToLower().Contains(FilterCriteria.ToLower());
+            switch (FilterBy)
+            {
+                case "FirstName":
+                    {
+                        predicatesList.Add(firstNames);
+                        break;
+                    }
+                case "SurName":
+                    {
+                        predicatesList.Add(surNames);
+                        break;
+                    }
+                case "PhoneNumber":
+                    {
+                        predicatesList.Add(phoneNumbers);
+                        break;
+                    }
+                case "Mail":
+                    {
+                        predicatesList.Add(mails);
+                        break;
+                    }
+                case "City":
+                    {
+                        predicatesList.Add(cities);
+                        break;
+                    }
+                default:
+                    {
+                        predicatesList.Add(firstNames);
+                        predicatesList.Add(surNames);
+                        predicatesList.Add(phoneNumbers);
+                        predicatesList.Add(mails);
+                        predicatesList.Add(cities);
+                        break;
+                    }
+            }
+
+            return predicatesList;
+        }
     }
 }
