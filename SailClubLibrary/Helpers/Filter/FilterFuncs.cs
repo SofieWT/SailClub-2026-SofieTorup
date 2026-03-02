@@ -12,10 +12,6 @@ namespace SailClubLibrary.Helpers.Filter
         public List<T> FilterFunction<T>(List<T> listOfObjs, params Predicate<T>[] predicates)
         {
             List<T> filterList = new List<T>();
-            //foreach (T item in listOfObjs.FindAll(pred))
-            //{
-            //    filterList.Add(item);
-            //}
             foreach (T obj in listOfObjs)
             {
                 bool matchesAllPreds = true;
@@ -29,10 +25,8 @@ namespace SailClubLibrary.Helpers.Filter
                     else if(matchesAllPreds)
                     { 
                         filterList.Add(obj);
-
                     } 
                 }
-
             }
             return filterList;
         }

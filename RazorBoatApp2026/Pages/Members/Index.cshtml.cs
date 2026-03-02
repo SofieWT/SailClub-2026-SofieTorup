@@ -18,7 +18,7 @@ namespace RazorBoatApp2026.Pages.Members
         public string SortBy { get; set; }
         [BindProperty(SupportsGet = true)]
         public string FilterBy { get; set; }
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public MemberType? SelectedMemberType { get; set; }
 
         public IndexModel(IMemberRepository memberRepository, IFilterFuncs filterFunc)
@@ -115,6 +115,10 @@ namespace RazorBoatApp2026.Pages.Members
                     }
             }
 
+            if(SelectedMemberType.HasValue)
+            {
+                //Noget her måske???
+            }
             return predicatesList;
         }
     }
