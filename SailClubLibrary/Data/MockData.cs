@@ -15,7 +15,8 @@ namespace SailClubLibrary.Data
             {
              { "23456789", new Member(1, "Peter","Jensen","23456789","Gaden 1","Hillerød","PH@gamil.com",MemberType.Senior,MemberRole.Member) },
              { "65345890", new Member(2, "Charlotte","Hansen","65345890","Street 1","Roskilde","ch@gamil.com",MemberType.Adult,MemberRole.Admin) },
-             {"99887766", new Member(3,"Poul", "Pedersen", "99887766", "Allé 87", "Vanløse", "pp@mail.com", MemberType.Senior, MemberRole.Admin) }
+             {"99887766", new Member(3,"Poul", "Pedersen", "99887766", "Allé 87", "Vanløse", "pp@mail.com", MemberType.Senior, MemberRole.Admin) },
+             {"22334455", new Member(4,"Søren", "Nielsen", "22334455", "Vej 87", "Farum", "sn@mail.com", MemberType.Junior, MemberRole.Member) }
             };
 
         private Dictionary<string, Boat> _boatData =
@@ -23,7 +24,7 @@ namespace SailClubLibrary.Data
               {
                  { "16-3335", new Boat(1, BoatType.TERA, "Model", "16-3335", "Is very good :3", 32, 23, 33, "1982")},
                  { "17-8767", new Boat(2, BoatType.LYNÆS, "Model", "17-8767", "Fast :3", 34, 25, 17, "2000")},
-                 {"10-1122", new Boat(3, BoatType.EUROPAJOLLE, "Model2000", "10-1122","Somewhat fast", 10,15,12, "2021")},
+                 { "10-1122", new Boat(3, BoatType.EUROPAJOLLE, "Model2000", "10-1122","Somewhat fast", 10,15,12, "2021")},
               };
         #endregion
 

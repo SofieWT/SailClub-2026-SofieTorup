@@ -32,7 +32,23 @@ namespace RazorBoatApp2026.Pages.Members
             if (!string.IsNullOrEmpty(FilterCriteria))
             {
                 var predicates = FilterByPredicate();
-                Members = _filterFunc.FilterFunction(mRepo.GetAllMembers(), predicates.ToArray());
+                List<Member> tempListOfMembers = _filterFunc.FilterFunction(mRepo.GetAllMembers(), predicates.ToArray());
+                if (SelectedMemberType.HasValue)
+                {
+                    List<Member> membersWType = new List<Member>();
+                    foreach (Member m in tempListOfMembers)
+                    {
+                        if (m.TheMemberType == SelectedMemberType)
+                        {
+                            membersWType.Add(m);
+                        }
+                    }
+                    Members = membersWType;
+                }
+                else
+                {
+                    Members = tempListOfMembers;
+                }
             }
             else
             {
@@ -70,13 +86,13 @@ namespace RazorBoatApp2026.Pages.Members
 
         public List<Predicate<Member>> FilterByPredicate()
         {
-
             List<Predicate<Member>> predicatesList = new List<Predicate<Member>>();
             Predicate<Member> firstNames = m => m.FirstName.ToLower().Contains(FilterCriteria.ToLower());
             Predicate<Member> surNames = m => m.SurName.ToLower().Contains(FilterCriteria.ToLower());
             Predicate<Member> phoneNumbers = m => m.PhoneNumber.Contains(FilterCriteria);
             Predicate<Member> mails = m => m.Mail.ToLower().Contains(FilterCriteria.ToLower());
             Predicate<Member> cities = m => m.City.ToLower().Contains(FilterCriteria.ToLower());
+            Predicate<Member> memberType = mt => SelectedMemberType.HasValue && mt.TheMemberType.Equals(SelectedMemberType);
             switch (FilterBy)
             {
                 case "FirstName":
@@ -113,11 +129,6 @@ namespace RazorBoatApp2026.Pages.Members
                         predicatesList.Add(cities);
                         break;
                     }
-            }
-
-            if(SelectedMemberType.HasValue)
-            {
-                //Noget her måske???
             }
             return predicatesList;
         }

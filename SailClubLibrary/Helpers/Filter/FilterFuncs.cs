@@ -14,18 +14,20 @@ namespace SailClubLibrary.Helpers.Filter
             List<T> filterList = new List<T>();
             foreach (T obj in listOfObjs)
             {
-                bool matchesAllPreds = true;
+
                 foreach (Predicate<T> predicate in predicates)
                 {
+                    bool matchesAllPreds = true;
                     if (!predicate(obj))
                     {
                         matchesAllPreds = false;
-                        break;
+
                     }
-                    else if(matchesAllPreds)
-                    { 
+                    else if (matchesAllPreds && (!filterList.Contains(obj)))
+                    {
                         filterList.Add(obj);
-                    } 
+
+                    }
                 }
             }
             return filterList;
