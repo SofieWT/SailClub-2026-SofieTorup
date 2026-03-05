@@ -35,15 +35,15 @@ namespace RazorBoatApp2026.Pages.Members
                 List<Member> tempListOfMembers = _filterFunc.FilterFunction(mRepo.GetAllMembers(), predicates.ToArray());
                 if (SelectedMemberType.HasValue)
                 {
-                    List<Member> membersWType = new List<Member>();
+                    List<Member> membersWithType = new List<Member>();
                     foreach (Member m in tempListOfMembers)
                     {
                         if (m.TheMemberType == SelectedMemberType)
                         {
-                            membersWType.Add(m);
+                            membersWithType.Add(m);
                         }
                     }
-                    Members = membersWType;
+                    Members = membersWithType;
                 }
                 else
                 {
@@ -92,7 +92,7 @@ namespace RazorBoatApp2026.Pages.Members
             Predicate<Member> phoneNumbers = m => m.PhoneNumber.Contains(FilterCriteria);
             Predicate<Member> mails = m => m.Mail.ToLower().Contains(FilterCriteria.ToLower());
             Predicate<Member> cities = m => m.City.ToLower().Contains(FilterCriteria.ToLower());
-            Predicate<Member> memberType = mt => SelectedMemberType.HasValue && mt.TheMemberType.Equals(SelectedMemberType);
+            //Predicate<Member> memberType = mt => SelectedMemberType.HasValue && mt.TheMemberType.Equals(SelectedMemberType);
             switch (FilterBy)
             {
                 case "FirstName":

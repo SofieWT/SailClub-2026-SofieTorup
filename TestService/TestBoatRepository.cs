@@ -24,7 +24,7 @@ namespace TestService
         }
 
         [TestMethod]
-        public void AddBoat_WithExsitingSailNo_Exception() //spørg Poul.
+        public void AddBoat_WithExsitingSailNo_Exception() 
         {
             //Arrange
             BoatRepository bRepo = new BoatRepository();
@@ -35,16 +35,6 @@ namespace TestService
             Assert.ThrowsException<BoatSailnumberExistsException>(() => bRepo.AddBoat(b2));
         }
 
-        //[TestMethod]
-        //public void AddBoat_NullBoat_Exception()
-        //{
-        //    //Arrange
-        //    BoatRepository bRepo = new BoatRepository();
-        //    Boat b1 = null;
-        //    bRepo.AddBoat(b1);
-        //    //Act & Assert
-        //    Assert.ThrowsException<NullReferenceException>(() => bRepo.AddBoat(b1));
-        //}
         [TestMethod]
         public void RemoveBoat_WithExsitingSailNo_NoException()
         {   
@@ -61,19 +51,6 @@ namespace TestService
             Assert.AreEqual(NoOfBoatsBefore - 1, NoOfBoatsAfter);
         }
 
-        //[TestMethod]
-        //public void RemoveBoat_WithNonSailNo_Exception() //spørg Poul.
-        //{
-        //    //Arrange
-        //    BoatRepository bRepo = new BoatRepository();
-        //    //act
-        //    int NoOfBoatsBefore = bRepo.Count;
-        //    bRepo.RemoveBoat();
-        //    int NoOfBoatsAfter = bRepo.Count;
-
-        //    //assert
-        //    Assert.ThrowsException<>
-        //}
 
         [TestMethod]
         public void UpdateBoat_SailNoExisting_NoException()
@@ -120,19 +97,6 @@ namespace TestService
 
             //assert
             Assert.IsNull(foundBoat);
-        }
-
-        [TestMethod]
-        public void FilterBoats_BoatsHasFilterCondition()
-        {
-            ////Arrange
-            //BoatRepository bRepo = new BoatRepository();
-            //Boat b1 = new Boat(99, BoatType.LASERJOLLE, "modellen", "19-1919", "Ingen Info", 8, 8, 8, "2000");
-            ////act
-            //List<Boat> returnedBoats = bRepo.FilterBoats("model");
-
-            ////assert
-            //Assert.
         }
 
     }
