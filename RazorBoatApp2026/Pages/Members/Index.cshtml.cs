@@ -92,7 +92,11 @@ namespace RazorBoatApp2026.Pages.Members
             Predicate<Member> phoneNumbers = m => m.PhoneNumber.Contains(FilterCriteria);
             Predicate<Member> mails = m => m.Mail.ToLower().Contains(FilterCriteria.ToLower());
             Predicate<Member> cities = m => m.City.ToLower().Contains(FilterCriteria.ToLower());
-            Predicate<Member> memberType = mt => SelectedMemberType.HasValue && mt.TheMemberType.Equals(SelectedMemberType);
+            //if (SelectedMemberType.HasValue)
+            //{
+                //Predicate<Member> memberType = mt => SelectedMemberType.HasValue && mt.TheMemberType.Equals(SelectedMemberType);
+            //}
+                
             //predicatesList.Add(memberType);
             switch (FilterBy)
             {

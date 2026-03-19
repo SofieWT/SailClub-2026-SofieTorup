@@ -23,7 +23,7 @@ namespace SailClubLibrary.Models
         public string Model { get; set; }
         [Required(ErrorMessage = "SailNumber is required")]
         public string SailNumber { get; set; }
-        public string EngineInfo { get; set; } //
+        public string EngineInfo { get; set; } 
         public double Draft { get; set; }
         public double Width { get; set; }
         public double Length { get; set; }
