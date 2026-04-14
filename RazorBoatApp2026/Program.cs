@@ -10,6 +10,8 @@ builder.Services.AddSingleton<IBoatRepository, BoatRepository>();//1. interfacet
 builder.Services.AddSingleton<IMemberRepository, MemberRepository>();
 builder.Services.AddSingleton<IBookingRepository, BookingRepository>();
 builder.Services.AddSingleton<IFilterFuncs,FilterFuncs>();
+builder.Services.AddSingleton<IBoatRepoAsync, BoatRepositoryAsync>(); //Denne bruges ved async
+
 builder.Services.AddSession(); // login
 builder.Services.AddHttpContextAccessor(); //login
 

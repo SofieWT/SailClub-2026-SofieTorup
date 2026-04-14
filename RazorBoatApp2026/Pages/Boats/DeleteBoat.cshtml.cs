@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
 using SailClubLibrary.Interfaces;
 using SailClubLibrary.Models;
 
@@ -7,22 +8,36 @@ namespace RazorBoatApp2026.Pages.Boats
 {
     public class DeleteEventModel : PageModel
     {
-        private IBoatRepository bRepo;
+        private IBoatRepoAsync bRepo;
         [BindProperty]
         public Boat BoatToBeDeleted { get; set; }
-        public DeleteEventModel(IBoatRepository boatRepository)
+        public DeleteEventModel(IBoatRepoAsync boatRepository)
         {
             bRepo = boatRepository;
         }
-        public IActionResult OnGet(string sailNumber)
+        public async Task<IActionResult> OnGetAsync(string sailNumber)
         {
-            BoatToBeDeleted = bRepo.SearchBoat(sailNumber);
+            BoatToBeDeleted = await bRepo.SearchBoat(sailNumber);
             return Page();
         }
-        public IActionResult OnPostDelete()
+        public async Task<IActionResult> OnPostDelete()
         {
-            bRepo.RemoveBoat(BoatToBeDeleted.SailNumber);
-            return RedirectToPage("index");
+            try
+            {
+                await bRepo.RemoveBoat(BoatToBeDeleted.SailNumber);
+                return RedirectToPage("index");
+            }
+            catch(SqlException sqlex)
+            {
+                ViewData["ErrorMessage"] = "The boat has bookings, and can therefore not be deleted";
+                return Page();
+            }
+            catch(Exception ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+                return Page();
+            }
+
         }
         public IActionResult OnpostCancel()
         {

@@ -8,25 +8,25 @@ namespace RazorBoatApp2026.Pages.Boats
 {
     public class IndexModel : PageModel
     {
-        private IBoatRepository bRepo;
+        private IBoatRepoAsync bRepo;
         public List<Boat> Boats { get; set; }
-        [BindProperty(SupportsGet =true)]
+        [BindProperty(SupportsGet = true)]
         public string FilterCriteria { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string SortBy { get; set; }
-        public IndexModel(IBoatRepository boatRepository)
+        public IndexModel(IBoatRepoAsync boatRepository)
         {
             bRepo = boatRepository;
         }
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            if(!string.IsNullOrEmpty(FilterCriteria))
+            if (!string.IsNullOrEmpty(FilterCriteria))
             {
-                Boats = bRepo.FilterBoats(FilterCriteria);
+                Boats = await bRepo.FilterBoats(FilterCriteria);
             }
             else
-                Boats = bRepo.GetAllBoats();
+                Boats = await bRepo.GetAllBoats();
 
             switch (SortBy)
             {

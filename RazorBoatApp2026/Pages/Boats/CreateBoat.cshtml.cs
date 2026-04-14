@@ -8,18 +8,18 @@ namespace RazorBoatApp2026.Pages.Boats
 {
     public class CreateBoatModel : PageModel
     {
-         private IBoatRepository _repo;
+         private IBoatRepoAsync _repo;
         [BindProperty]
         public Boat NewBoat { get; set; }
 
-        public CreateBoatModel(IBoatRepository boatRepository)
+        public CreateBoatModel(IBoatRepoAsync boatRepository)
         {
             _repo = boatRepository;
         }
         public void OnGet()
         {
         }
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if(!ModelState.IsValid)
             {
@@ -27,8 +27,9 @@ namespace RazorBoatApp2026.Pages.Boats
             }
             try
             {
-            _repo.AddBoat(NewBoat);
+                await _repo.AddBoat(NewBoat);
             }
+            //catch()
             catch(BoatSailnumberExistsException bex)
             {
                 ViewData["ErrorMessage"] = bex.Message;

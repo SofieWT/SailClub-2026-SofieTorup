@@ -7,26 +7,26 @@ namespace RazorBoatApp2026.Pages.Boats
 {
     public class EditBoatModel : PageModel
     {
-        private IBoatRepository bRepo;
+        private IBoatRepoAsync bRepo;
         [BindProperty]
         public Boat BoatToUpdate { get; set; }
-        public EditBoatModel(IBoatRepository boatRepository)
+        public EditBoatModel(IBoatRepoAsync boatRepository)
         {
             bRepo = boatRepository;
         }
-        public void OnGet(string sailNumber)
+        public async Task OnGetAsync(string sailNumber)
         {
-            BoatToUpdate = bRepo.SearchBoat(sailNumber);
+            BoatToUpdate = await bRepo.SearchBoat(sailNumber);
         }
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
-            bRepo.UpdateBoat(BoatToUpdate);
+            await bRepo.UpdateBoat(BoatToUpdate);
             return RedirectToPage("Index");
         }
 
-        public IActionResult OnPostDelete()
+        public async Task<IActionResult> OnPostDeleteAsync()
         {
-            bRepo.RemoveBoat(BoatToUpdate.SailNumber);
+            await bRepo.RemoveBoat(BoatToUpdate.SailNumber);
             return RedirectToPage("Index");
         }
         public IActionResult OnpostCancel()

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
 using SailClubLibrary.Interfaces;
 using SailClubLibrary.Models;
 
@@ -7,22 +8,42 @@ namespace RazorBoatApp2026.Pages.Boats
 {
     public class DeleteBoat2Model : PageModel
     {
-        private IBoatRepository _bRepo;
+        private IBoatRepoAsync _bRepo;
+        [BindProperty]
         public Boat DeleteBoat2 { get; set; }
 
-        public DeleteBoat2Model(IBoatRepository boatRepository)
+        public DeleteBoat2Model(IBoatRepoAsync boatRepository)
         {
             _bRepo = boatRepository;
         }
-        public IActionResult OnGet(string sailnumber)
+        public async Task<IActionResult> OnGet(string sailnumber)
         {
-            DeleteBoat2 = _bRepo.SearchBoat(sailnumber);
+            DeleteBoat2 = await _bRepo.SearchBoat(sailnumber);
+
             return Page();
         }
-        public IActionResult OnPostDelete(string sailNumber)
+        public async Task<IActionResult> OnPostDelete(string sailNumber)
         {
-            _bRepo.RemoveBoat(sailNumber);
-            return RedirectToPage("Index");
+            try
+            {
+                await _bRepo.RemoveBoat(sailNumber);
+                return RedirectToPage("Index");
+            }
+            catch(SqlException sqlex)
+            {
+                ViewData["ErrorMessage"] = sqlex.Message;
+                return Page();
+            }
+            catch(Exception ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+                return Page();
+            }
+            finally
+            {
+
+            }
+
         }
         public IActionResult OnPost()
         {
