@@ -31,7 +31,7 @@ namespace RazorBoatApp2026.Pages.Boats
             }
             catch(SqlException sqlex)
             {
-                ViewData["ErrorMessage"] = sqlex.Message;
+                ViewData["ErrorMessage"] = "The boat has bookings, and can therefore not be deleted";
                 return Page();
             }
             catch(Exception ex)

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
 using SailClubLibrary.Exceptions;
 using SailClubLibrary.Interfaces;
 using SailClubLibrary.Models;
@@ -29,10 +30,14 @@ namespace RazorBoatApp2026.Pages.Boats
             {
                 await _repo.AddBoat(NewBoat);
             }
-            //catch()
             catch(BoatSailnumberExistsException bex)
             {
                 ViewData["ErrorMessage"] = bex.Message;
+                return Page();
+            }
+            catch(SqlException sqlex)
+            {
+                ViewData["ErrorMessage"] = sqlex.Message;
                 return Page();
             }
             catch(Exception ex)
